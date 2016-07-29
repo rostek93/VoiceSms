@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
     private boolean correctContact = false;
 
     private String receivedMessage = "";
+    private String fullMessage = "";
 
 
     int counter = 0;
