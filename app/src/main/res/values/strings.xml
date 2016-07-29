@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="application_name">Głosowy SMS</string>
+    <string name="usun">Usuń</string>
+    <string name="contact">Kontakt:</string>
+    <string name="message">Wiadomość:</string>
+    <string name="exit">Zamknij</string>
 </resources>

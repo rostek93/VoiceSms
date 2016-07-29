@@ -3,33 +3,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="#000000"
+    android:textColor="#f9fff9"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:weightSum="3"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:textColor="#f9fff9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@string/application_name"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical|right" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView"
+            android:layout_weight="1"
+            android:src="@drawable/redicon" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/welcome"
         android:layout_width="wrap_content"
+        android:textColor="#f9fff9"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-        android:text="Voice SMS" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/contact"
+        android:id="@+id/contactTextView"
+        android:layout_gravity="center_horizontal|left"
+        android:layout_marginLeft="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:textColor="#f9fff9"
+        android:layout_height="wrap_content"
+        android:id="@+id/contactField"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="#f9fff9"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/message"
+        android:id="@+id/messageTextView"
+        android:layout_gravity="center_horizontal|left"
+        android:layout_marginLeft="10dp"
+        android:textIsSelectable="false" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:textColor="#f9fff9"
+        android:layout_height="218dp"
+        android:id="@+id/messageField"
+        android:gravity="left|top"
+        android:layout_weight="1" />
 
     <ImageButton
-        android:id="@+id/start_reg"
+        android:id="@+id/startButton"
+        android:textColor="#f9fff9"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:adjustViewBounds="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/soundon"
+        android:clickable="false" />
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_btn_speak_now" ></ImageButton>
+        android:layout_gravity="center_horizontal|bottom"
+        android:weightSum="2"
+        android:layout_weight="0">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Usuń"
-        android:id="@+id/clearButton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#f9fff9"
+            android:text="@string/usun"
+            android:id="@+id/clearButton"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/speech"
-        android:textSize="25sp"
-        android:layout_width="match_parent"
-        android:layout_height="424dp"
-        android:layout_gravity="center" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#f9fff9"
+            android:text="@string/exit"
+            android:id="@+id/exitButton"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </LinearLayout>

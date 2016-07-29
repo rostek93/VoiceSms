@@ -1,169 +1,353 @@
 package com.example.kamil.voicesms;
 
-//package com.learn2crack.speech;
-
 import java.util.ArrayList;
 
-import android.content.ComponentName;
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-        import android.net.NetworkInfo;
-        import android.os.Bundle;
-        import android.app.Activity;
-        import android.app.Dialog;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.speech.RecognizerIntent;
+import android.net.NetworkInfo;
+import android.provider.ContactsContract;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-        import android.view.View.OnClickListener;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.ImageButton;
-        import android.widget.ListView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import org.w3c.dom.Text;
+
+enum FieldEnum { contact, message }
 
 public class MainActivity extends Activity {
-    private static final int REQUEST_CODE = 1234;
-    ImageButton Start;
-    TextView Speech;
-    Button Clear;
-    Dialog match_text_dialog;
-    ListView textlist;
-    ArrayList<String> matches_text;
-    String allText = "";
+    private static final String TAG = "VoiceSMS";
+
+    private ImageButton startButton;
+    private EditText messageField;
+    private EditText contactField;
+    private TextView messageTextView;
+    private TextView contactTextView;
+    private FieldEnum fieldEnum = FieldEnum.message;
+    private boolean sendMessage = false;
+    private ImageView iconImageView;
+    private SpeechRecognizer mSpeechRecognizer = null;
+
+    public static String messageText = "";
+    private String contactText = "";
+    private boolean correctContact = false;
+
+
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Start = (ImageButton)findViewById(R.id.start_reg);
-        Speech = (TextView)findViewById(R.id.speech);
-        Clear = (Button)findViewById(R.id.clearButton);
+        startButton = (ImageButton) findViewById(R.id.startButton);
+        Button clearButton = (Button) findViewById(R.id.clearButton);
+        Button exitButton = (Button) findViewById(R.id.exitButton);
+        messageField = (EditText) findViewById(R.id.messageField);
+        contactField = (EditText) findViewById(R.id.contactField);
+        messageTextView = (TextView) findViewById(R.id.messageTextView);
+        contactTextView = (TextView) findViewById(R.id.contactTextView);
+        messageTextView.setTypeface(Typeface.DEFAULT_BOLD);
+        messageField.setSelection(messageField.length());
+        messageField.requestFocus();
+        iconImageView = (ImageView) findViewById(R.id.imageView);
+        iconImageView.setImageResource(R.drawable.redicon);
 
-        // Rozpoczyna nasłuchiwanie, a na koncu ptrzetwarza na tekst
-        Start.setOnClickListener(new OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isConnected()){
-            //    if(true){
-
-                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                 //   intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
-                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                    startActivityForResult(intent, REQUEST_CODE);
+                if (mSpeechRecognizer == null) {
+                    if (isConnected()) {
+                        startVoiceRead();
+                       // startButton.setImageResource(R.drawable.soundoff);
+                        Toast.makeText(getApplicationContext(), "Start", Toast.LENGTH_LONG).show();
+                    } else
+                        Toast.makeText(getApplicationContext(), "Brak połączenia z internetem", Toast.LENGTH_LONG).show();
+                } else {
+                    stopVoiceRead();
+                    //startButton.setImageResource(R.drawable.soundon);
+                    Toast.makeText(getApplicationContext(), "Stop", Toast.LENGTH_LONG).show();
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Plese Connect to Internet", Toast.LENGTH_LONG).show();
-                }}
-
+            }
         });
 
-        Clear.setOnClickListener(new OnClickListener() {
+         clearButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 messageText = "";
+                 messageField.setText(messageText);
+             }
+         });
+
+        exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                allText="";
-                Speech.setText("Tekst: \n" +allText);
+                stopVoiceRead();
+                System.exit(0);
             }
         });
     }
 
-
-
-    public  boolean isConnected()
-    {
+    public boolean isConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo net = cm.getActiveNetworkInfo();
-        if (net!=null && net.isAvailable() && net.isConnected()) {
+        if (net != null && net.isAvailable() && net.isConnected()) {
             return true;
         } else {
             return false;
         }
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 
-            matches_text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            allText += interpunctionAlgorithm(matches_text.get(0));
-
-            Speech.setText("Tekst: \n" +allText);
-
-            /*
-            match_text_dialog = new Dialog(MainActivity.this);
-            match_text_dialog.setContentView(R.layout.dialog_matches_frag);
-            match_text_dialog.setTitle("Select Matching Text");
-            textlist = (ListView)match_text_dialog.findViewById(R.id.list);
-            matches_text = data
-                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            ArrayAdapter<String> adapter =    new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, matches_text);
-            textlist.setAdapter(adapter);
-            textlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    Speech.setText("You have said " +matches_text.get(position));
-                    match_text_dialog.hide();
-                }
-            });
-            match_text_dialog.show();
-*/
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+    public void startVoiceRead() {
+        Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+        startButton.setImageResource(R.drawable.soundoff);
+      //  speechIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, 5000);
+      //  speechIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS , 3000);
+      //  speechIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS , 5000);
+        getSpeechRecognizer().startListening(speechIntent);
     }
 
-    public String interpunctionAlgorithm(String text) {
+    public void stopVoiceRead() {
+        if (mSpeechRecognizer != null) {
+            mSpeechRecognizer.destroy();
+            mSpeechRecognizer = null;
+            iconImageView.setImageResource(R.drawable.redicon);
+            startButton.setImageResource(R.drawable.soundon);
+        }
+    }
 
+    private SpeechRecognizer getSpeechRecognizer() {
+        if (mSpeechRecognizer == null) {
+            mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
+                @Override
+                public void onReadyForSpeech(Bundle params) {
+                    Log.d(TAG, "onReadyForSpeech");
+                    iconImageView.setImageResource(R.drawable.greenicon);
+                }
 
-        String[] parts = text.split(" ");
-        text = "";
+                @Override
+                public void onBeginningOfSpeech() {
+                    Log.d(TAG, "onBeginningOfSpeech");
+                }
 
-        for (int i=0; i<parts.length; i++) {
+                @Override
+                public void onBufferReceived(byte[] buffer) {
+                    Log.d(TAG, "onBufferReceived");
+                }
 
-            if(parts[i].equals("kropka")) {
-                parts[i] = ".";
-                if (i+1 < parts.length)
-                    if (!parts[i+1].equals("przecinek") && !parts[i+1].equals("znak") && !parts[i+1].equals("wykrzyknik"))
-                        parts[i+1] = Character.toUpperCase(parts[i+1].charAt(0)) + (parts[i+1].length() > 1 ? parts[i+1].substring(1) : "");
-            }
+                @Override
+                public void onEndOfSpeech() {
+                    Log.d(TAG, "onEndOfSpeech");
+                    iconImageView.setImageResource(R.drawable.redicon);
+                }
 
-            else if (parts[i].equals("przecinek")) {
-                parts[i] = ",";
-            }
-
-            else if (parts[i].equals("znak")) {
-                if (i+1 < parts.length)
-                    if (parts[i+1].equals("zapytania")) {
-                        parts[i] = "?";
-                        parts[i+1] = "";
+                @Override
+                public void onError(int error) {
+                    iconImageView.setImageResource(R.drawable.redicon);
+                    String message;
+                    boolean restart = true;
+                    switch (error) {
+                        case SpeechRecognizer.ERROR_AUDIO:
+                            message = "Audio recording error";
+                            break;
+                        case SpeechRecognizer.ERROR_CLIENT:
+                            message = "Client side error";
+                            restart = false;
+                            break;
+                        case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                            message = "Insufficient permissions";
+                            restart = false;
+                            break;
+                        case SpeechRecognizer.ERROR_NETWORK:
+                            message = "Network error";
+                            break;
+                        case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                            message = "Network timeout";
+                            break;
+                        case SpeechRecognizer.ERROR_NO_MATCH:
+                            message = "No match";
+                            break;
+                        case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                            message = "RecognitionService busy";
+                            break;
+                        case SpeechRecognizer.ERROR_SERVER:
+                            message = "error from server";
+                            break;
+                        case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                            message = "No speech input";
+                            break;
+                        default:
+                            message = "Not recognised";
+                            break;
                     }
-                if (i+2 < parts.length)
-                    if (!parts[i+2].equals("kropka") && !parts[i+2].equals("przecinek") && !parts[i+2].equals("wykrzyknik"))
-                        parts[i+2] = Character.toUpperCase(parts[i+2].charAt(0)) + (parts[i+4].length() > 1 ? parts[i+2].substring(1) : "");
-            }
+                    // mTextView.append("onError code:" + error + " message: " + message);
+                    Log.d(TAG, "onError:" + message);
+                    if (restart) {
+                        getSpeechRecognizer().cancel();
+                        startVoiceRead();
+                    }
+                }
 
-            else if (parts[i].equals("wykrzyknik")) {
-                parts[i] = "!";
-                if (i+1 < parts.length)
-                    if (!parts[i+1].equals("kropka") && !parts[i+1].equals("znak") && !parts[i+1].equals("przecinek"))
-                        parts[i+1] = Character.toUpperCase(parts[i+1].charAt(0)) + (parts[i+1].length() > 1 ? parts[i+1].substring(1) : "");
-            }
+                @Override
+                public void onEvent(int eventType, Bundle params) {
+                    Log.d(TAG, "onEvent");
+                }
 
+                @Override
+                public void onPartialResults(Bundle partialResults) {
+                    Log.d(TAG, "onPartialResults");
+
+                    ArrayList<String> text = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    String temp;
+                    if (text.size() > 0) {
+                        counter++;
+                       // temp = String.valueOf(counter);
+                        temp = text.get(0);
+                      //  temp.toLowerCase();
+                      //  temp += "\n";
+                        if (!messageText.equals(temp)) {
+                            messageText = temp;
+                            //messageText = (temp + messageText);
+                            messageField.append(counter + temp + "\n");
+                            // messageField.setText(String.valueOf(counter) + messageText);
+                            //  messageText = "";
+                           // processingText(temp);
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onResults(Bundle results) {
+                    Log.d(TAG, "onResults");
+                    ArrayList<String> text = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    startVoiceRead();
+                    messageText += text.get(0);
+                    messageText += " ";
+                   // processingText(text.get(0));
+                }
+
+                @Override
+                public void onRmsChanged(float rmsdB) {
+                }
+            });
         }
+        return mSpeechRecognizer;
+    }
+
+    private void processingText(String text) {
+        text = isReadyToSend(text);
+        if(!changeField(text)) {
+            if (fieldEnum == FieldEnum.contact) {
+                setContactText(text);
+            } else {
+                messageText = Algorithm.interpunction(text);
+                messageField.setText(messageText);
+                messageField.setSelection(messageField.length());
+            }
+        }
+    }
+
+    private String getContactFromBook(String text) {
+        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
+        String number = null;
+        while (phones.moveToNext())
+        {
+            String name=phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            if (text.equalsIgnoreCase(name))
+                number = phoneNumber;
+        }
+        phones.close();
+        return number;
+    }
+
+    private void setContactText(String text) {
+        correctContact = false;
+        if (text.length() < 1)
+            return;
+        try {
+            contactText = text.replace(" ", "");
+            Long.valueOf(contactText);
+            contactField.setText(contactText);
+            correctContact = true;
+        } catch (Exception e) {
+            contactText = getContactFromBook(text);
+            if (contactText == null)
+                contactField.setText("Nie znaleziono: " + text);
+            else {
+                contactText = contactText.replace("-", "");
+                contactField.setText(contactText);
+                correctContact = true;
+            }
+        }
+    }
+
+    private String isReadyToSend (String text) {
+        if (sendMessage) {
+            if(text.equalsIgnoreCase("tak")) {
+                Toast.makeText(getApplicationContext(), "Wysyłanie wiadomości...", Toast.LENGTH_LONG).show();
+                stopVoiceRead();
+            } else {
+                sendMessage = false;
+            }
+        } else {
+            if (text.equalsIgnoreCase("wyślij SMS")) {
+                if(correctContact) {
+                    Toast.makeText(getApplicationContext(), "Czy na pewno chcesz wysłać SMS?", Toast.LENGTH_LONG).show();
+                    sendMessage = true;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Nieprawidłowy kontakt", Toast.LENGTH_LONG).show();
+                    sendMessage = false;
+                }
+            } else {
+                sendMessage = false;
+                return text;
+            }
+        }
+        return "";
+    }
+
+    private boolean changeField(String text) {
+        boolean change = false;
+        String[] parts = text.split(" ");
+        if (parts.length > 2)
+            return change;
 
         for (int i=0; i<parts.length; i++) {
-            if (i == 0 && !parts[i].equals("?") && !parts[i].equals(".") && !parts[i].equals("!") && !parts[i].equals("!"))
-                text += Character.toUpperCase(parts[0].charAt(0)) + (parts[0].length() > 1 ? parts[0].substring(1) : "");
-            else if (parts[i] == "." || parts[i] == "?" || parts[i] == "!" || parts[i] == ",")
-                text += parts[i];
-            else if (parts[i] != "")
-                text += " " + parts[i];
+            if(parts[i].equalsIgnoreCase("kontakt") && fieldEnum == FieldEnum.message) {
+                fieldEnum = FieldEnum.contact;
+                contactTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                messageTextView.setTypeface(Typeface.DEFAULT);
+                contactField.requestFocus();
+                contactField.setSelection(contactField.length());
+                change = true;
+            }
+            if(parts[i].equalsIgnoreCase("wiadomość") && fieldEnum == FieldEnum.contact) {
+                fieldEnum = FieldEnum.message;
+                contactTextView.setTypeface(Typeface.DEFAULT);
+                messageTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                messageField.requestFocus();
+                messageField.setSelection(messageField.length());
+                change = true;
+            }
         }
-
-        return text;
+        return change;
     }
 
 }
