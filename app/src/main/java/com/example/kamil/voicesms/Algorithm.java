@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.jar.Manifest;
 
 /**
@@ -11,22 +15,14 @@ import java.util.jar.Manifest;
  */
 public class Algorithm {
 
-    static String interpunction(String text) {
-        String[] parts = text.split(" ");
-        text = "";
+    static String interp(String[] parts) {
+        int speechMarkCounter = 0;
+        for (int i = 0; i < parts.length; i++) {
 
-        for (int i=0; i < parts.length; i++) {
-            parts[i] = parts[i].toLowerCase();
-          //  parts[i] = Character.toLowerCase(parts[i].charAt(0)) + (parts[i].length() > 1 ? parts[i].substring(1) : "");
-        }
-
-        for (int i=0; i<parts.length; i++) {
-
-            if(parts[i].equalsIgnoreCase("kropka")) {
+            if (parts[i].equalsIgnoreCase("kropka")) {
                 parts[i] = ".";
-                if (i+1 < parts.length)
-                    if (!parts[i+1].equals("przecinek") && !parts[i+1].equals("znak") && !parts[i+1].equals("wykrzyknik"))
-                        parts[i+1] = Character.toUpperCase(parts[i+1].charAt(0)) + (parts[i+1].length() > 1 ? parts[i+1].substring(1) : "");
+                if (i + 1 < parts.length)
+                    parts[i + 1] = Character.toUpperCase(parts[i + 1].charAt(0)) + (parts[i + 1].length() > 1 ? parts[i + 1].substring(1) : "");
             }
 
             else if (parts[i].equalsIgnoreCase("przecinek")) {
@@ -35,69 +31,109 @@ public class Algorithm {
 
             else if (parts[i].equalsIgnoreCase("znak")) {
                 if (i+1 < parts.length)
-                    if (parts[i+1].equals("zapytania")) {
+                    if (parts[i+1].equalsIgnoreCase("zapytania")) {
                         parts[i] = "?";
                         parts[i+1] = "";
                         if (i+2 < parts.length)
-                            if (!parts[i+2].equals("kropka") && !parts[i+2].equals("przecinek") && !parts[i+2].equals("wykrzyknik"))
-                                parts[i+2] = Character.toUpperCase(parts[i+2].charAt(0)) + (parts[i+2].length() > 1 ? parts[i+2].substring(1) : "");
+                            parts[i+2] = Character.toUpperCase(parts[i+2].charAt(0)) + (parts[i+2].length() > 1 ? parts[i+2].substring(1) : "");
                     }
             }
 
             else if (parts[i].equalsIgnoreCase("wykrzyknik")) {
                 parts[i] = "!";
                 if (i+1 < parts.length)
-                    if (!parts[i+1].equals("kropka") && !parts[i+1].equals("znak") && !parts[i+1].equals("przecinek"))
                         parts[i+1] = Character.toUpperCase(parts[i+1].charAt(0)) + (parts[i+1].length() > 1 ? parts[i+1].substring(1) : "");
             }
 
-            else if (parts[i].equalsIgnoreCase(("usuń"))) {
+            else if (parts[i].equalsIgnoreCase("cudzysłów")) {
+                parts[i] = "\"";
+            }
+
+            else if (parts[i].equalsIgnoreCase("dwukropek")) {
+                parts[i] = ":";
+            }
+
+            else if (parts[i].equalsIgnoreCase("myślnik")) {
+                parts[i] = "-";
+            }
+
+            else if (parts[i].equalsIgnoreCase("otwórz")) {
+                if (i+1 < parts.length)
+                    if (parts[i+1].equalsIgnoreCase("nawias")) {
+                        parts[i] = "(";
+                        parts[i+1] = "";
+                    }
+            }
+
+            else if (parts[i].equalsIgnoreCase("zamknij")) {
+                if (i+1 < parts.length)
+                    if (parts[i+1].equalsIgnoreCase("nawias")) {
+                        parts[i] = ")";
+                        parts[i+1] = "";
+                    }
+            }
+
+            else if (parts[i].equalsIgnoreCase("emotikon")) {
                 if (i+1 < parts.length) {
-                    if (parts[i + 1].equals("wyraz")) {
+                    if (parts[i+1].equalsIgnoreCase("uśmiech")) {
+                        parts[i] = ":)";
+                        parts[i+1] = "";
+                    } else if (parts[i+1].equalsIgnoreCase("smutny")) {
+                        parts[i] = ":(";
+                        parts[i + 1] = "";
+                    } else if (parts[i+1].equalsIgnoreCase("język")) {
+                        parts[i] = ":P";
+                        parts[i+1] = "";
+                    }
+                }
+            }
+
+            else if (parts[i].equalsIgnoreCase(("usuń"))) {
+                if (i + 1 < parts.length) {
+                    if (parts[i + 1].equalsIgnoreCase("wyraz")) {
                         if (i == 0) {
-                            String[] message = MainActivity.messageText.split(" ");
-                            MainActivity.messageText = "";
+                            String[] message = MainActivity.readyMessageText.split(" ");
+                            MainActivity.readyMessageText = "";
                             for (int j = 0; j < message.length - 1; j++) {
-                                MainActivity.messageText += message[j];
-                                if (j != message.length-2)
-                                    MainActivity.messageText += " ";
+                                MainActivity.readyMessageText += message[j];
+                                if (j != message.length - 2)
+                                    MainActivity.readyMessageText += " ";
                             }
                             parts[i] = "";
                             parts[i + 1] = "";
                         } else {
-                            if (parts[i-1].equals("")) {
+                            if (parts[i - 1].equals("")) {
                                 for (int j = i - 2; j >= 0; j--) {
                                     if (!parts[j].equals("")) {
                                         parts[j] = "";
                                         break;
                                     }
                                 }
-                            }
-                            else
+                            } else
                                 parts[i - 1] = "";
                             parts[i] = "";
                             parts[i + 1] = "";
                         }
 
-                    } else if (parts[i + 1].equals("zdanie")) {
+                    } else if (parts[i + 1].equalsIgnoreCase("zdanie")) {
                         if (i == 0) {
-                            int index = MainActivity.messageText.lastIndexOf(".");
-                            if (index < MainActivity.messageText.lastIndexOf("?"))
-                                index = MainActivity.messageText.lastIndexOf("?");
-                            if (index < MainActivity.messageText.lastIndexOf("!"))
-                                index = MainActivity.messageText.lastIndexOf("!");
+                            int index = MainActivity.readyMessageText.lastIndexOf(".");
+                            if (index < MainActivity.readyMessageText.lastIndexOf("?"))
+                                index = MainActivity.readyMessageText.lastIndexOf("?");
+                            if (index < MainActivity.readyMessageText.lastIndexOf("!"))
+                                index = MainActivity.readyMessageText.lastIndexOf("!");
 
-                            if (index > -1 && MainActivity.messageText.length()-1 != index)
-                                MainActivity.messageText = MainActivity.messageText.substring(0, index+1);
-                            else if (index == MainActivity.messageText.length()-1) {
-                                MainActivity.messageText = MainActivity.messageText.substring(0, index);
-                                index = MainActivity.messageText.lastIndexOf(".");
-                                if (index < MainActivity.messageText.lastIndexOf("?"))
-                                    index = MainActivity.messageText.lastIndexOf("?");
-                                if (index < MainActivity.messageText.lastIndexOf("!"))
-                                    index = MainActivity.messageText.lastIndexOf("!");
+                            if (index > -1 && MainActivity.readyMessageText.length() - 1 != index)
+                                MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index + 1);
+                            else if (index == MainActivity.readyMessageText.length() - 1) {
+                                MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index);
+                                index = MainActivity.readyMessageText.lastIndexOf(".");
+                                if (index < MainActivity.readyMessageText.lastIndexOf("?"))
+                                    index = MainActivity.readyMessageText.lastIndexOf("?");
+                                if (index < MainActivity.readyMessageText.lastIndexOf("!"))
+                                    index = MainActivity.readyMessageText.lastIndexOf("!");
                                 if (index > -1)
-                                    MainActivity.messageText = MainActivity.messageText.substring(0, index + 1);
+                                    MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index + 1);
                                 else {
                                     for (int j = 0; j > parts.length; j++)
                                         parts[j] = "";
@@ -106,42 +142,68 @@ public class Algorithm {
                             parts[i] = "";
                             parts[i + 1] = "";
                         } else {
+                            int index = -1;
+                            int indexLastWord = i;
+
+                            for (int k = i - 1; k >= 0; k--) {
+                                if (!parts[k].equals("")) {
+                                    indexLastWord = k;
+                                    break;
+                                }
+                            }
+
+                            for (int j = 0; j < indexLastWord; j++)
+                                if (parts[j].equals(".") || parts[j].equals("?") || parts[j].equals("!"))
+                                    index = j;
+
+                            if (index > -1) {
+                                for (int j = index + 1; j < i + 2; j++)
+                                    parts[j] = "";
+                                if (i + 2 < parts.length)
+                                    parts[i + 2] = Character.toUpperCase(parts[i + 2].charAt(0)) + (parts[i + 2].length() > 1 ? parts[i + 2].substring(1) : "");
+                            } else {
+                                for (int j = 0; j < i + 2; j++)
+                                    parts[j] = "";
+                            }
+
+                            /*
                             String temp = "";
-                            for (int j = 0; j < i+1; j++)
+                            for (int j = 0; j < i + 1; j++)
                                 temp += (parts[j] + " ");
+
                             int index = temp.lastIndexOf(".");
-                            if (index < temp.lastIndexOf("?"))
+                            if (index == temp.length()-2) {
+                                temp = temp.substring(0, index + 1);
+                                index = temp.lastIndexOf(".");
+                            }
+                            if (index < temp.lastIndexOf("?") && index != temp.length()-2)
                                 index = temp.lastIndexOf("?");
-                            if (index < temp.lastIndexOf("!"))
+                            if (index < temp.lastIndexOf("!") && index != temp.length()-2)
                                 index = temp.lastIndexOf("!");
                             if (index > -1) {
                                 temp = temp.substring(0, index);
                                 int count = temp.length() - temp.replace(" ", "").length();
-                                for (int j = count+1; j < i+2; j++)
+                                for (int j = count + 1; j < i + 2; j++)
                                     parts[j] = "";
-                                if (i+2 < parts.length)
-                                    parts[i+2] = Character.toUpperCase(parts[i+2].charAt(0)) + (parts[i+2].length() > 1 ? parts[i+2].substring(1) : "");
+                                if (i + 2 < parts.length)
+                                    parts[i + 2] = Character.toUpperCase(parts[i + 2].charAt(0)) + (parts[i + 2].length() > 1 ? parts[i + 2].substring(1) : "");
                             } else {
-                                for (int j = 0; j < i+2; j++)
+                                for (int j = 0; j < i + 2; j++)
                                     parts[j] = "";
                             }
+                            */
                         }
 
-                    } else if (parts[i + 1].equals("wszystko")) {
-                        if (i == 0) {
-                            MainActivity.messageText = "";
-                            parts[i] = "";
-                            parts[i + 1] = "";
-                        } else {
-                            for (int j = 0; j < i+2; j++) {
-                                parts[j] = "";
-                            }
-                        }
+                    } else if (parts[i + 1].equalsIgnoreCase("wszystko")) {
+                        MainActivity.readyMessageText = "";
+                        for (int j = 0; j < i + 2; j++)
+                            parts[j] = "";
                     }
                 }
             }
         }
 
+        // moves all empty parts on end
         for (int i=0; i<parts.length-1; i++) {
             if (parts[i].equals("")) {
                 for (int j = i + 1; j < parts.length; j++) {
@@ -154,24 +216,31 @@ public class Algorithm {
             }
         }
 
+        String text = "";
         for (int i=0; i<parts.length; i++) {
             if (parts[0].equals(""))
-                return MainActivity.messageText;
-            if (i == 0 && MainActivity.messageText.equals(""))
+                return text;
+            if (i == 0 && MainActivity.readyMessageText.equals("")) // Pierwszy wyraz wiadomości
                 text += Character.toUpperCase(parts[0].charAt(0)) + (parts[0].length() > 1 ? parts[0].substring(1) : "");
             else if (i == 0 && !parts[i].equals("?") && !parts[i].equals(".") && !parts[i].equals("!") && !parts[i].equals(",")) {
-                char index = MainActivity.messageText.charAt(MainActivity.messageText.length()-1);
+                char index = MainActivity.readyMessageText.charAt(MainActivity.readyMessageText.length()-1);
                 text += " ";
                 if (index == '.' || index == '?' || index == '!')
                     text += Character.toUpperCase(parts[0].charAt(0)) + (parts[0].length() > 1 ? parts[0].substring(1) : "");
                 else
                     text += Character.toLowerCase(parts[0].charAt(0)) + (parts[0].length() > 1 ? parts[0].substring(1) : "");
-            } else if (parts[i].equals(".") || parts[i].equals("?") || parts[i].equals("!") || parts[i].equals(",")) {
+            } else if (parts[i].equals(".") || parts[i].equals("?") || parts[i].equals("!") || parts[i].equals(",") || parts[i].equals(":")) {
                 text += parts[i];
-            } else if (!parts[i].equals(""))
+            } else if (parts[i-1].equals("(")) {
+                text += parts[i];
+            } else if (parts[i].equals(")")) {
+                text += parts[i];
+            } else if (!parts[i].equals("")) {
                 text += " " + parts[i];
+            }
         }
-        return MainActivity.messageText + text;
+        return text;
     }
+
 
 }

@@ -16,18 +16,18 @@
         <dex dex="F:\Programowanie\Projekty Android\VoiceSMS\app\build\intermediates\pre-dexed\debug\classes-8d34f724b67b4f0a9a00f0ae722656e590d30f3e.jar" />
     </item>
     <item
-        jar="F:\Programowanie\Projekty Android\VoiceSMS\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="F:\Programowanie\Projekty Android\VoiceSMS\app\build\intermediates\pre-dexed\debug\classes-ad7a363ebd350faf02f0c5dddc7ac2b503cab68f.jar" />
-    </item>
-    <item
         jar="E:\Users\Kamil\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
         <dex dex="F:\Programowanie\Projekty Android\VoiceSMS\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-06280ec85cfce748e6ab66b3ba423e0810629b41.jar" />
+    </item>
+    <item
+        jar="F:\Programowanie\Projekty Android\VoiceSMS\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="F:\Programowanie\Projekty Android\VoiceSMS\app\build\intermediates\pre-dexed\debug\classes-ad7a363ebd350faf02f0c5dddc7ac2b503cab68f.jar" />
     </item>
 
 </items>

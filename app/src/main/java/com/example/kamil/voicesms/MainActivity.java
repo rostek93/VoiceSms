@@ -1,7 +1,6 @@
 package com.example.kamil.voicesms;
 
 import java.util.ArrayList;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -14,6 +13,7 @@ import android.speech.SpeechRecognizer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,9 +22,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-import org.w3c.dom.Text;
 
 enum FieldEnum { contact, message }
 
@@ -41,20 +38,19 @@ public class MainActivity extends Activity {
     private ImageView iconImageView;
     private SpeechRecognizer mSpeechRecognizer = null;
 
-    public static String messageText = "";
-    private String contactText = "";
+    public static String readyMessageText = "";
+    public static String originalReceivedMessage = "";
+    public static String changedReceivedMessage = "";
+    public static String[] partsMessage;
+
+    public String contactText = "";
     private boolean correctContact = false;
-
-    private String receivedMessage = "";
-    private String fullMessage = "";
-
-
-    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         startButton = (ImageButton) findViewById(R.id.startButton);
         Button clearButton = (Button) findViewById(R.id.clearButton);
         Button exitButton = (Button) findViewById(R.id.exitButton);
@@ -74,13 +70,11 @@ public class MainActivity extends Activity {
                 if (mSpeechRecognizer == null) {
                     if (isConnected()) {
                         startVoiceRead();
-                       // startButton.setImageResource(R.drawable.soundoff);
                         Toast.makeText(getApplicationContext(), "Start", Toast.LENGTH_LONG).show();
                     } else
                         Toast.makeText(getApplicationContext(), "Brak połączenia z internetem", Toast.LENGTH_LONG).show();
                 } else {
                     stopVoiceRead();
-                    //startButton.setImageResource(R.drawable.soundon);
                     Toast.makeText(getApplicationContext(), "Stop", Toast.LENGTH_LONG).show();
                 }
             }
@@ -89,8 +83,12 @@ public class MainActivity extends Activity {
          clearButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 messageText = "";
-                 messageField.setText(messageText);
+                 contactText = "";
+                 readyMessageText = "";
+                 messageField.setText(readyMessageText);
+                 contactField.setText(contactText);
+                 stopVoiceRead();
+                 startVoiceRead();
              }
          });
 
@@ -118,9 +116,6 @@ public class MainActivity extends Activity {
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
         startButton.setImageResource(R.drawable.soundoff);
-      //  speechIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, 5000);
-      //  speechIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS , 3000);
-      //  speechIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS , 5000);
         getSpeechRecognizer().startListening(speechIntent);
     }
 
@@ -214,25 +209,23 @@ public class MainActivity extends Activity {
                 @Override
                 public void onPartialResults(Bundle partialResults) {
                     Log.d(TAG, "onPartialResults");
-
                     ArrayList<String> text = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     String temp;
                     if (text.size() > 0) {
-                        counter++;
-                       // temp = String.valueOf(counter);
                         temp = text.get(0);
-                      //  temp.toLowerCase();
-                      //  temp += "\n";
-                        if (!messageText.equals(temp)) {
-                            messageText = temp;
-                            //messageText = (temp + messageText);
-                            messageField.append(counter + temp + "\n");
-                            // messageField.setText(String.valueOf(counter) + messageText);
-                            //  messageText = "";
-                           // processingText(temp);
+                        if (!originalReceivedMessage.equals(temp)) {
+                            if (fieldEnum == FieldEnum.message) {
+                                originalReceivedMessage = temp;
+                                if (processingText(originalReceivedMessage)) {
+                                    messageField.setText(readyMessageText + changedReceivedMessage);
+                                    messageField.setSelection(messageField.length());
+                                }
+                            } else {
+                                changedReceivedMessage = temp;
+                                setContactText(changedReceivedMessage);
+                            }
                         }
                     }
-
                 }
 
                 @Override
@@ -240,9 +233,18 @@ public class MainActivity extends Activity {
                     Log.d(TAG, "onResults");
                     ArrayList<String> text = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     startVoiceRead();
-                    messageText += text.get(0);
-                    messageText += " ";
-                   // processingText(text.get(0));
+                    if (text.size() > 0) {
+                        if (fieldEnum == FieldEnum.message) {
+                            originalReceivedMessage = text.get(0);
+                            processingText(originalReceivedMessage);
+                            readyMessageText += changedReceivedMessage;
+                            messageField.setText(readyMessageText);
+                            messageField.setSelection(messageField.length());
+                        } else {
+                            changedReceivedMessage = text.get(0);
+                            setContactText(changedReceivedMessage);
+                        }
+                    }
                 }
 
                 @Override
@@ -253,25 +255,56 @@ public class MainActivity extends Activity {
         return mSpeechRecognizer;
     }
 
-    private void processingText(String text) {
-        text = isReadyToSend(text);
-        if(!changeField(text)) {
-            if (fieldEnum == FieldEnum.contact) {
-                setContactText(text);
-            } else {
-                messageText = Algorithm.interpunction(text);
-                messageField.setText(messageText);
-                messageField.setSelection(messageField.length());
+    private boolean processingText(String text) {
+        String[] parts = text.split(" ");
+        if (!changeField(parts)) {
+            if (!sendSMS(parts)) {
+                changedReceivedMessage = Algorithm.interp(parts);
+                return true;
             }
         }
+        return false;
+    }
+
+    private boolean sendSMS(String[] parts) {
+        for (int i=0; i<parts.length; i++) {
+            if(parts[i].equalsIgnoreCase("edytorze")) {
+                if (i + 2 < parts.length) {
+                    if (parts[i+1].equalsIgnoreCase("wyślij") && parts[i+2].equalsIgnoreCase("sms")) {
+                        // TODO
+                        changedReceivedMessage = changedReceivedMessage.replace(" edytorze", "");
+                        changedReceivedMessage = changedReceivedMessage.replace(" Edytorze", "");
+                        changedReceivedMessage = changedReceivedMessage.replace(" wyślij", "");
+                        changedReceivedMessage = changedReceivedMessage.replace(" Wyślij", "");
+                        readyMessageText += changedReceivedMessage;
+                        messageField.setText(readyMessageText);
+
+                       // Toast.makeText(getApplicationContext(), "Wysyłanie wiadomości...", Toast.LENGTH_LONG).show();
+                        stopVoiceRead();
+                        try {
+                            SmsManager smsManager=SmsManager.getDefault();
+                            smsManager.sendTextMessage(contactText,null,readyMessageText,null,null);
+                            Toast.makeText(getApplicationContext(),"SMS Sent!", Toast.LENGTH_LONG).show();
+                            //    Log.d("myapp","hello..");
+                        }
+                        catch (  Exception e) {
+                            Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private String getContactFromBook(String text) {
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
+        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
         String number = null;
         while (phones.moveToNext())
         {
-            String name=phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
             if (text.equalsIgnoreCase(name))
                 number = phoneNumber;
@@ -281,76 +314,151 @@ public class MainActivity extends Activity {
     }
 
     private void setContactText(String text) {
-        correctContact = false;
-        if (text.length() < 1)
-            return;
-        try {
-            contactText = text.replace(" ", "");
-            Long.valueOf(contactText);
-            contactField.setText(contactText);
-            correctContact = true;
-        } catch (Exception e) {
-            contactText = getContactFromBook(text);
-            if (contactText == null)
-                contactField.setText("Nie znaleziono: " + text);
-            else {
-                contactText = contactText.replace("-", "");
-                contactField.setText(contactText);
-                correctContact = true;
-            }
-        }
-    }
-
-    private String isReadyToSend (String text) {
-        if (sendMessage) {
-            if(text.equalsIgnoreCase("tak")) {
-                Toast.makeText(getApplicationContext(), "Wysyłanie wiadomości...", Toast.LENGTH_LONG).show();
-                stopVoiceRead();
-            } else {
-                sendMessage = false;
-            }
-        } else {
-            if (text.equalsIgnoreCase("wyślij SMS")) {
-                if(correctContact) {
-                    Toast.makeText(getApplicationContext(), "Czy na pewno chcesz wysłać SMS?", Toast.LENGTH_LONG).show();
-                    sendMessage = true;
-                } else {
-                    Toast.makeText(getApplicationContext(), "Nieprawidłowy kontakt", Toast.LENGTH_LONG).show();
-                    sendMessage = false;
-                }
-            } else {
-                sendMessage = false;
-                return text;
-            }
-        }
-        return "";
-    }
-
-    private boolean changeField(String text) {
-        boolean change = false;
         String[] parts = text.split(" ");
-        if (parts.length > 2)
-            return change;
-
-        for (int i=0; i<parts.length; i++) {
-            if(parts[i].equalsIgnoreCase("kontakt") && fieldEnum == FieldEnum.message) {
-                fieldEnum = FieldEnum.contact;
-                contactTextView.setTypeface(Typeface.DEFAULT_BOLD);
-                messageTextView.setTypeface(Typeface.DEFAULT);
-                contactField.requestFocus();
-                contactField.setSelection(contactField.length());
-                change = true;
-            }
-            if(parts[i].equalsIgnoreCase("wiadomość") && fieldEnum == FieldEnum.contact) {
-                fieldEnum = FieldEnum.message;
-                contactTextView.setTypeface(Typeface.DEFAULT);
-                messageTextView.setTypeface(Typeface.DEFAULT_BOLD);
-                messageField.requestFocus();
-                messageField.setSelection(messageField.length());
-                change = true;
+        if (!changeFieldContact(parts)) {
+            if(!sendSMSContact(parts)) {
+                if(!clearContact(parts)) {
+                    correctContact = false;
+                    if (text.length() < 1)
+                        return;
+                    try {
+                       // contactText = text;
+                        Long.valueOf(contactText);
+                        contactField.setText(contactText);
+                        correctContact = true;
+                    } catch (Exception e) {
+                        contactText = getContactFromBook(contactText);
+                        if (contactText == null)
+                            contactField.setText("Nie znaleziono: " + changedReceivedMessage);
+                        else {
+                            contactText = contactText.replace("-", "");
+                            contactField.setText(contactText);
+                            correctContact = true;
+                        }
+                    }
+                }
             }
         }
-        return change;
+    }
+
+    private boolean sendSMSContact(String[] parts) {
+        for (int i=0; i<parts.length; i++) {
+            if(parts[i].equalsIgnoreCase("edytorze")) {
+                if (i == parts.length-1)
+                    return true;
+
+                if (i + 1 < parts.length) {
+                    if (parts[i+1].equalsIgnoreCase("wyślij")) {
+                        if (i+1 == parts.length-1)
+                            return true;
+                    }
+                }
+                if (i + 2 < parts.length) {
+                    if (parts[i+1].equalsIgnoreCase("wyślij") && parts[i+2].equalsIgnoreCase("sms")) {
+                        // TODO
+                        Toast.makeText(getApplicationContext(), "Wysyłanie wiadomości...", Toast.LENGTH_LONG).show();
+                        stopVoiceRead();
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean changeFieldContact(String[] parts) {
+        for (int i=0; i<parts.length; i++) {
+            if(parts[i].equalsIgnoreCase("edytorze")) {
+                if (i == parts.length-1)
+                    return true;
+
+                if (i + 1 < parts.length) {
+                    if (parts[i + 1].equalsIgnoreCase("wiadomość") && fieldEnum == FieldEnum.contact) {
+                        stopVoiceRead();
+                        startVoiceRead();
+                        fieldEnum = FieldEnum.message;
+                        contactTextView.setTypeface(Typeface.DEFAULT);
+                        messageTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                        messageField.requestFocus();
+                        messageField.setSelection(messageField.length());
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean changeField(String[] parts) {
+        for (int i=0; i<parts.length; i++) {
+            if(parts[i].equalsIgnoreCase("edytorze")) {
+                if (i + 1 < parts.length) {
+                    if (parts[i+1].equalsIgnoreCase("kontakt") && fieldEnum == FieldEnum.message) {
+                        fieldEnum = FieldEnum.contact;
+
+                        changedReceivedMessage = changedReceivedMessage.replace(" edytorze", "");
+                        changedReceivedMessage = changedReceivedMessage.replace(" Edytorze", "");
+                        readyMessageText += changedReceivedMessage;
+                        messageField.setText(readyMessageText);
+                        messageField.setSelection(messageField.length());
+
+                        stopVoiceRead();
+                        startVoiceRead();
+                        contactTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                        messageTextView.setTypeface(Typeface.DEFAULT);
+                        contactField.requestFocus();
+                        contactField.setSelection(contactField.length());
+                        return true;
+                    }
+                }
+            }
+            if(parts[i].equalsIgnoreCase("edytorze")) {
+                if (i + 1 < parts.length) {
+                    if (parts[i + 1].equalsIgnoreCase("wiadomość") && fieldEnum == FieldEnum.contact) {
+                        stopVoiceRead();
+                        startVoiceRead();
+                        fieldEnum = FieldEnum.message;
+                        contactTextView.setTypeface(Typeface.DEFAULT);
+                        messageTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                        messageField.requestFocus();
+                        messageField.setSelection(messageField.length());
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean clearContact(String[] parts) {
+        for (int i = parts.length-1; i >= 0; i--) {
+            if(parts[i].equalsIgnoreCase("edytorze")) {
+                if (i == parts.length-1)
+                    return true;
+
+                if (i + 1 < parts.length) {
+                    if (parts[i + 1].equalsIgnoreCase("wyczyść")) {
+                        changedReceivedMessage = "";
+                        if (i+1 == parts.length-1) {
+                            contactField.setText(changedReceivedMessage);
+                            return true;
+                        } else {
+                            for (int j = 0; j < parts.length; j++) {
+                                if (j < i + 2)
+                                    parts[j] = "";
+                                changedReceivedMessage += parts[j];
+                                if (j >= i+2 && j != parts.length-1)
+                                    changedReceivedMessage += " ";
+                            }
+                            contactText = changedReceivedMessage;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        contactText = changedReceivedMessage;
+        return false;
     }
 
 }
