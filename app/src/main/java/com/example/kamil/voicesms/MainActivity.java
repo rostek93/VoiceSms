@@ -81,6 +81,7 @@ public class MainActivity extends Activity {
                         Toast.makeText(getApplicationContext(), "Brak połączenia z internetem", Toast.LENGTH_LONG).show();
                 } else {
                     stopVoiceRead();
+                    readyMessageText += changedReceivedMessage;
                     Toast.makeText(getApplicationContext(), "Stop", Toast.LENGTH_LONG).show();
                 }
             }
@@ -94,7 +95,6 @@ public class MainActivity extends Activity {
                  messageField.setText(readyMessageText);
                  contactField.setText(contactText);
                  stopVoiceRead();
-                 startVoiceRead();
              }
          });
 
