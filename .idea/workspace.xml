@@ -39,11 +39,9 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3402299">
+            <state vertical-scroll-proportion="0.0">
               <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
               <folding>
-                <element signature="e#2701#3438#0" expanded="true" />
-                <element signature="e#3437#3438#0" expanded="true" />
                 <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -67,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+              <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -1547,9 +1545,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1560,7 +1558,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1775,7 +1773,6 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21124361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29301533" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1787,13 +1784,14 @@
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1376702" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13993949" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21124361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -1824,8 +1822,37 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
+            <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onError#0;class#5285:9478" expanded="false" />
+            <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#changeField#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#changeFieldToMessage#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#sendSmsReady#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#saveSms#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#processingMessage#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#processingContact#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getContactFromBook#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#setContactText#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#clearContact#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1865,8 +1892,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1898,8 +1923,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1931,8 +1954,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1964,8 +1985,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1997,8 +2016,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="280" column="44" selection-start-line="280" selection-start-column="44" selection-end-line="280" selection-end-column="44" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2030,8 +2047,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="463" column="0" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2063,8 +2078,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="463" column="0" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2096,8 +2109,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2129,8 +2140,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="330" column="49" selection-start-line="330" selection-start-column="49" selection-end-line="330" selection-end-column="49" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2162,8 +2171,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2195,8 +2202,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2228,8 +2233,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2261,8 +2264,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="285" column="44" selection-start-line="285" selection-start-column="33" selection-end-line="285" selection-end-column="44" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2294,8 +2295,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="285" column="44" selection-start-line="285" selection-start-column="33" selection-end-line="285" selection-end-column="44" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2327,8 +2326,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2360,8 +2357,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="114" column="58" selection-start-line="114" selection-start-column="58" selection-end-line="114" selection-end-column="58" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2393,8 +2388,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2432,18 +2425,16 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3402299">
+        <state vertical-scroll-proportion="0.0">
           <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
           <folding>
-            <element signature="e#2701#3438#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
