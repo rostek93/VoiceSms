@@ -1,11 +1,11 @@
 package com.example.kamil.voicesms;
 
 /**
- * Created by Kamil on 2016-06-04.
+ * Created by Kamil Rostecki
  */
 public class Algorithm {
 
-    static String processingText (String[] parts) {
+    static String processingText(String[] parts) {
         for (int i = 0; i < parts.length; i++) {
             findPunctuationMarks(parts, i);
             findEmoticons(parts, i);
@@ -17,16 +17,16 @@ public class Algorithm {
 
     private static void findEmoticons(String[] parts, int i) {
         if (parts[i].equalsIgnoreCase("emotikon")) {
-            if (i+1 < parts.length) {
-                if (parts[i+1].equalsIgnoreCase("uśmiech")) {
+            if (i + 1 < parts.length) {
+                if (parts[i + 1].equalsIgnoreCase("uśmiech")) {
                     parts[i] = ":)";
-                    parts[i+1] = "";
-                } else if (parts[i+1].equalsIgnoreCase("smutny")) {
+                    parts[i + 1] = "";
+                } else if (parts[i + 1].equalsIgnoreCase("smutny")) {
                     parts[i] = ":(";
                     parts[i + 1] = "";
-                } else if (parts[i+1].equalsIgnoreCase("język")) {
+                } else if (parts[i + 1].equalsIgnoreCase("język")) {
                     parts[i] = ":P";
-                    parts[i+1] = "";
+                    parts[i + 1] = "";
                 }
             }
         }
@@ -36,7 +36,7 @@ public class Algorithm {
         if (parts[i].equalsIgnoreCase("kropka")) {
             parts[i] = ".";
             for (int j = i + 1; j < parts.length; j++)
-                if (parts[j] != "") {
+                if (!parts[j].equals("")) {
                     parts[j] = Character.toUpperCase(parts[j].charAt(0)) + (parts[j].length() > 1 ? parts[j].substring(1) : "");
                     break;
                 }
@@ -46,12 +46,12 @@ public class Algorithm {
             parts[i] = ",";
 
         else if (parts[i].equalsIgnoreCase("znak")) {
-            if (i+1 < parts.length)
-                if (parts[i+1].equalsIgnoreCase("zapytania")) {
+            if (i + 1 < parts.length)
+                if (parts[i + 1].equalsIgnoreCase("zapytania")) {
                     parts[i] = "?";
-                    parts[i+1] = "";
+                    parts[i + 1] = "";
                     for (int j = i + 2; j < parts.length; j++)
-                        if (parts[j] != "") {
+                        if (!parts[j].equals("")) {
                             parts[j] = Character.toUpperCase(parts[j].charAt(0)) + (parts[j].length() > 1 ? parts[j].substring(1) : "");
                             break;
                         }
@@ -61,7 +61,7 @@ public class Algorithm {
         else if (parts[i].equalsIgnoreCase("wykrzyknik")) {
             parts[i] = "!";
             for (int j = i + 1; j < parts.length; j++)
-                if (parts[j] != "") {
+                if (!parts[j].equals("")) {
                     parts[j] = Character.toUpperCase(parts[j].charAt(0)) + (parts[j].length() > 1 ? parts[j].substring(1) : "");
                     break;
                 }
@@ -77,18 +77,18 @@ public class Algorithm {
             parts[i] = "-";
 
         else if (parts[i].equalsIgnoreCase("otwórz")) {
-            if (i+1 < parts.length)
-                if (parts[i+1].equalsIgnoreCase("nawias")) {
+            if (i + 1 < parts.length)
+                if (parts[i + 1].equalsIgnoreCase("nawias")) {
                     parts[i] = "(";
-                    parts[i+1] = "";
+                    parts[i + 1] = "";
                 }
         }
 
         else if (parts[i].equalsIgnoreCase("zamknij")) {
-            if (i+1 < parts.length)
-                if (parts[i+1].equalsIgnoreCase("nawias")) {
+            if (i + 1 < parts.length)
+                if (parts[i + 1].equalsIgnoreCase("nawias")) {
                     parts[i] = ")";
-                    parts[i+1] = "";
+                    parts[i + 1] = "";
                 }
         }
     }
@@ -120,8 +120,9 @@ public class Algorithm {
                         parts[i] = "";
                         parts[i + 1] = "";
                     }
+                }
 
-                } else if (parts[i + 1].equalsIgnoreCase("zdanie")) {
+                else if (parts[i + 1].equalsIgnoreCase("zdanie")) {
                     if (i == 0) {
                         int index = MainActivity.readyMessageText.lastIndexOf(".");
                         if (index < MainActivity.readyMessageText.lastIndexOf("?"))

@@ -36,13 +36,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.3402299">
+              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
               <folding>
                 <element signature="e#2701#3438#0" expanded="true" />
+                <element signature="e#3437#3438#0" expanded="true" />
                 <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -62,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7034483">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -1824,6 +1825,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1864,6 +1866,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1896,6 +1899,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1928,6 +1932,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1960,6 +1965,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -1992,6 +1998,7 @@
           <caret line="280" column="44" selection-start-line="280" selection-start-column="44" selection-end-line="280" selection-end-column="44" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2024,6 +2031,7 @@
           <caret line="463" column="0" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2056,6 +2064,7 @@
           <caret line="463" column="0" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2088,6 +2097,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2120,6 +2130,7 @@
           <caret line="330" column="49" selection-start-line="330" selection-start-column="49" selection-end-line="330" selection-end-column="49" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2152,6 +2163,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2184,6 +2196,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2216,6 +2229,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2248,6 +2262,7 @@
           <caret line="285" column="44" selection-start-line="285" selection-start-column="33" selection-end-line="285" selection-end-column="44" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2280,6 +2295,7 @@
           <caret line="285" column="44" selection-start-line="285" selection-start-column="33" selection-end-line="285" selection-end-column="44" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2312,6 +2328,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2344,6 +2361,7 @@
           <caret line="114" column="58" selection-start-line="114" selection-start-column="58" selection-end-line="114" selection-end-column="58" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2376,6 +2394,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2410,12 +2429,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3402299">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
           <folding>
             <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSpeechRecognizer#0;class#MainActivity#0" expanded="false" />
@@ -2431,14 +2459,6 @@
             <element signature="method#setContactText#0;class#MainActivity#0" expanded="false" />
             <element signature="method#clearContact#0;class#MainActivity#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7034483">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
