@@ -1,210 +1,180 @@
 package com.example.kamil.voicesms;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.provider.ContactsContract;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.jar.Manifest;
-
 /**
  * Created by Kamil on 2016-06-04.
  */
 public class Algorithm {
 
-    static String interp(String[] parts) {
-        int speechMarkCounter = 0;
+    static String processingText (String[] parts) {
         for (int i = 0; i < parts.length; i++) {
+            findPunctuationMarks(parts, i);
+            findEmoticons(parts, i);
+            deleting(parts, i);
+        }
+        moveEmptyPartsAtEnd(parts);
+        return createTextFromParts(parts);
+    }
 
-            if (parts[i].equalsIgnoreCase("kropka")) {
-                parts[i] = ".";
-                if (i + 1 < parts.length)
-                    parts[i + 1] = Character.toUpperCase(parts[i + 1].charAt(0)) + (parts[i + 1].length() > 1 ? parts[i + 1].substring(1) : "");
-            }
-
-            else if (parts[i].equalsIgnoreCase("przecinek")) {
-                parts[i] = ",";
-            }
-
-            else if (parts[i].equalsIgnoreCase("znak")) {
-                if (i+1 < parts.length)
-                    if (parts[i+1].equalsIgnoreCase("zapytania")) {
-                        parts[i] = "?";
-                        parts[i+1] = "";
-                        if (i+2 < parts.length)
-                            parts[i+2] = Character.toUpperCase(parts[i+2].charAt(0)) + (parts[i+2].length() > 1 ? parts[i+2].substring(1) : "");
-                    }
-            }
-
-            else if (parts[i].equalsIgnoreCase("wykrzyknik")) {
-                parts[i] = "!";
-                if (i+1 < parts.length)
-                        parts[i+1] = Character.toUpperCase(parts[i+1].charAt(0)) + (parts[i+1].length() > 1 ? parts[i+1].substring(1) : "");
-            }
-
-            else if (parts[i].equalsIgnoreCase("cudzysłów")) {
-                parts[i] = "\"";
-            }
-
-            else if (parts[i].equalsIgnoreCase("dwukropek")) {
-                parts[i] = ":";
-            }
-
-            else if (parts[i].equalsIgnoreCase("myślnik")) {
-                parts[i] = "-";
-            }
-
-            else if (parts[i].equalsIgnoreCase("otwórz")) {
-                if (i+1 < parts.length)
-                    if (parts[i+1].equalsIgnoreCase("nawias")) {
-                        parts[i] = "(";
-                        parts[i+1] = "";
-                    }
-            }
-
-            else if (parts[i].equalsIgnoreCase("zamknij")) {
-                if (i+1 < parts.length)
-                    if (parts[i+1].equalsIgnoreCase("nawias")) {
-                        parts[i] = ")";
-                        parts[i+1] = "";
-                    }
-            }
-
-            else if (parts[i].equalsIgnoreCase("emotikon")) {
-                if (i+1 < parts.length) {
-                    if (parts[i+1].equalsIgnoreCase("uśmiech")) {
-                        parts[i] = ":)";
-                        parts[i+1] = "";
-                    } else if (parts[i+1].equalsIgnoreCase("smutny")) {
-                        parts[i] = ":(";
-                        parts[i + 1] = "";
-                    } else if (parts[i+1].equalsIgnoreCase("język")) {
-                        parts[i] = ":P";
-                        parts[i+1] = "";
-                    }
+    private static void findEmoticons(String[] parts, int i) {
+        if (parts[i].equalsIgnoreCase("emotikon")) {
+            if (i+1 < parts.length) {
+                if (parts[i+1].equalsIgnoreCase("uśmiech")) {
+                    parts[i] = ":)";
+                    parts[i+1] = "";
+                } else if (parts[i+1].equalsIgnoreCase("smutny")) {
+                    parts[i] = ":(";
+                    parts[i + 1] = "";
+                } else if (parts[i+1].equalsIgnoreCase("język")) {
+                    parts[i] = ":P";
+                    parts[i+1] = "";
                 }
             }
+        }
+    }
 
-            else if (parts[i].equalsIgnoreCase(("usuń"))) {
-                if (i + 1 < parts.length) {
-                    if (parts[i + 1].equalsIgnoreCase("wyraz")) {
-                        if (i == 0) {
-                            String[] message = MainActivity.readyMessageText.split(" ");
-                            MainActivity.readyMessageText = "";
-                            for (int j = 0; j < message.length - 1; j++) {
-                                MainActivity.readyMessageText += message[j];
-                                if (j != message.length - 2)
-                                    MainActivity.readyMessageText += " ";
-                            }
-                            parts[i] = "";
-                            parts[i + 1] = "";
-                        } else {
-                            if (parts[i - 1].equals("")) {
-                                for (int j = i - 2; j >= 0; j--) {
-                                    if (!parts[j].equals("")) {
-                                        parts[j] = "";
-                                        break;
-                                    }
-                                }
-                            } else
-                                parts[i - 1] = "";
-                            parts[i] = "";
-                            parts[i + 1] = "";
+    private static void findPunctuationMarks(String[] parts, int i) {
+        if (parts[i].equalsIgnoreCase("kropka")) {
+            parts[i] = ".";
+            if (i + 1 < parts.length)
+                parts[i + 1] = Character.toUpperCase(parts[i + 1].charAt(0)) + (parts[i + 1].length() > 1 ? parts[i + 1].substring(1) : "");
+        }
+
+        else if (parts[i].equalsIgnoreCase("przecinek"))
+            parts[i] = ",";
+
+        else if (parts[i].equalsIgnoreCase("znak")) {
+            if (i+1 < parts.length)
+                if (parts[i+1].equalsIgnoreCase("zapytania")) {
+                    parts[i] = "?";
+                    parts[i+1] = "";
+                    if (i+2 < parts.length)
+                        parts[i+2] = Character.toUpperCase(parts[i+2].charAt(0)) + (parts[i+2].length() > 1 ? parts[i+2].substring(1) : "");
+                }
+        }
+
+        else if (parts[i].equalsIgnoreCase("wykrzyknik")) {
+            parts[i] = "!";
+            if (i+1 < parts.length)
+                parts[i+1] = Character.toUpperCase(parts[i+1].charAt(0)) + (parts[i+1].length() > 1 ? parts[i+1].substring(1) : "");
+        }
+
+        else if (parts[i].equalsIgnoreCase("cudzysłów"))
+            parts[i] = "\"";
+
+        else if (parts[i].equalsIgnoreCase("dwukropek"))
+            parts[i] = ":";
+
+        else if (parts[i].equalsIgnoreCase("myślnik"))
+            parts[i] = "-";
+
+        else if (parts[i].equalsIgnoreCase("otwórz")) {
+            if (i+1 < parts.length)
+                if (parts[i+1].equalsIgnoreCase("nawias")) {
+                    parts[i] = "(";
+                    parts[i+1] = "";
+                }
+        }
+
+        else if (parts[i].equalsIgnoreCase("zamknij")) {
+            if (i+1 < parts.length)
+                if (parts[i+1].equalsIgnoreCase("nawias")) {
+                    parts[i] = ")";
+                    parts[i+1] = "";
+                }
+        }
+    }
+
+    private static void deleting(String[] parts, int i) {
+        if (parts[i].equalsIgnoreCase(("usuń"))) {
+            if (i + 1 < parts.length) {
+                if (parts[i + 1].equalsIgnoreCase("wyraz")) {
+                    if (i == 0) {
+                        String[] message = MainActivity.readyMessageText.split(" ");
+                        MainActivity.readyMessageText = "";
+                        for (int j = 0; j < message.length - 1; j++) {
+                            MainActivity.readyMessageText += message[j];
+                            if (j != message.length - 2)
+                                MainActivity.readyMessageText += " ";
                         }
+                        parts[i] = "";
+                        parts[i + 1] = "";
+                    } else {
+                        if (parts[i - 1].equals("")) {
+                            for (int j = i - 2; j >= 0; j--) {
+                                if (!parts[j].equals("")) {
+                                    parts[j] = "";
+                                    break;
+                                }
+                            }
+                        } else
+                            parts[i - 1] = "";
+                        parts[i] = "";
+                        parts[i + 1] = "";
+                    }
 
-                    } else if (parts[i + 1].equalsIgnoreCase("zdanie")) {
-                        if (i == 0) {
-                            int index = MainActivity.readyMessageText.lastIndexOf(".");
+                } else if (parts[i + 1].equalsIgnoreCase("zdanie")) {
+                    if (i == 0) {
+                        int index = MainActivity.readyMessageText.lastIndexOf(".");
+                        if (index < MainActivity.readyMessageText.lastIndexOf("?"))
+                            index = MainActivity.readyMessageText.lastIndexOf("?");
+                        if (index < MainActivity.readyMessageText.lastIndexOf("!"))
+                            index = MainActivity.readyMessageText.lastIndexOf("!");
+
+                        if (index > -1 && MainActivity.readyMessageText.length() - 1 != index)
+                            MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index + 1);
+                        else if (index == MainActivity.readyMessageText.length() - 1) {
+                            MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index);
+                            index = MainActivity.readyMessageText.lastIndexOf(".");
                             if (index < MainActivity.readyMessageText.lastIndexOf("?"))
                                 index = MainActivity.readyMessageText.lastIndexOf("?");
                             if (index < MainActivity.readyMessageText.lastIndexOf("!"))
                                 index = MainActivity.readyMessageText.lastIndexOf("!");
-
-                            if (index > -1 && MainActivity.readyMessageText.length() - 1 != index)
+                            if (index > -1)
                                 MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index + 1);
-                            else if (index == MainActivity.readyMessageText.length() - 1) {
-                                MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index);
-                                index = MainActivity.readyMessageText.lastIndexOf(".");
-                                if (index < MainActivity.readyMessageText.lastIndexOf("?"))
-                                    index = MainActivity.readyMessageText.lastIndexOf("?");
-                                if (index < MainActivity.readyMessageText.lastIndexOf("!"))
-                                    index = MainActivity.readyMessageText.lastIndexOf("!");
-                                if (index > -1)
-                                    MainActivity.readyMessageText = MainActivity.readyMessageText.substring(0, index + 1);
-                                else {
-                                    for (int j = 0; j > parts.length; j++)
-                                        parts[j] = "";
-                                }
-                            }
-                            parts[i] = "";
-                            parts[i + 1] = "";
-                        } else {
-                            int index = -1;
-                            int indexLastWord = i;
-
-                            for (int k = i - 1; k >= 0; k--) {
-                                if (!parts[k].equals("")) {
-                                    indexLastWord = k;
-                                    break;
-                                }
-                            }
-
-                            for (int j = 0; j < indexLastWord; j++)
-                                if (parts[j].equals(".") || parts[j].equals("?") || parts[j].equals("!"))
-                                    index = j;
-
-                            if (index > -1) {
-                                for (int j = index + 1; j < i + 2; j++)
-                                    parts[j] = "";
-                                if (i + 2 < parts.length)
-                                    parts[i + 2] = Character.toUpperCase(parts[i + 2].charAt(0)) + (parts[i + 2].length() > 1 ? parts[i + 2].substring(1) : "");
-                            } else {
-                                for (int j = 0; j < i + 2; j++)
+                            else {
+                                for (int j = 0; j > parts.length; j++)
                                     parts[j] = "";
                             }
+                        }
+                        parts[i] = "";
+                        parts[i + 1] = "";
+                    } else {
+                        int index = -1;
+                        int indexLastWord = i;
 
-                            /*
-                            String temp = "";
-                            for (int j = 0; j < i + 1; j++)
-                                temp += (parts[j] + " ");
-
-                            int index = temp.lastIndexOf(".");
-                            if (index == temp.length()-2) {
-                                temp = temp.substring(0, index + 1);
-                                index = temp.lastIndexOf(".");
+                        for (int k = i - 1; k >= 0; k--) {
+                            if (!parts[k].equals("")) {
+                                indexLastWord = k;
+                                break;
                             }
-                            if (index < temp.lastIndexOf("?") && index != temp.length()-2)
-                                index = temp.lastIndexOf("?");
-                            if (index < temp.lastIndexOf("!") && index != temp.length()-2)
-                                index = temp.lastIndexOf("!");
-                            if (index > -1) {
-                                temp = temp.substring(0, index);
-                                int count = temp.length() - temp.replace(" ", "").length();
-                                for (int j = count + 1; j < i + 2; j++)
-                                    parts[j] = "";
-                                if (i + 2 < parts.length)
-                                    parts[i + 2] = Character.toUpperCase(parts[i + 2].charAt(0)) + (parts[i + 2].length() > 1 ? parts[i + 2].substring(1) : "");
-                            } else {
-                                for (int j = 0; j < i + 2; j++)
-                                    parts[j] = "";
-                            }
-                            */
                         }
 
-                    } else if (parts[i + 1].equalsIgnoreCase("wszystko")) {
-                        MainActivity.readyMessageText = "";
-                        for (int j = 0; j < i + 2; j++)
-                            parts[j] = "";
+                        for (int j = 0; j < indexLastWord; j++)
+                            if (parts[j].equals(".") || parts[j].equals("?") || parts[j].equals("!"))
+                                index = j;
+
+                        if (index > -1) {
+                            for (int j = index + 1; j < i + 2; j++)
+                                parts[j] = "";
+                            if (i + 2 < parts.length)
+                                parts[i + 2] = Character.toUpperCase(parts[i + 2].charAt(0)) + (parts[i + 2].length() > 1 ? parts[i + 2].substring(1) : "");
+                        } else {
+                            for (int j = 0; j < i + 2; j++)
+                                parts[j] = "";
+                        }
                     }
+
+                } else if (parts[i + 1].equalsIgnoreCase("wszystko")) {
+                    MainActivity.readyMessageText = "";
+                    for (int j = 0; j < i + 2; j++)
+                        parts[j] = "";
                 }
             }
         }
+    }
 
-        // moves all empty parts on end
-        for (int i=0; i<parts.length-1; i++) {
+    private static void moveEmptyPartsAtEnd(String[] parts) {
+        for (int i = 0; i < parts.length - 1; i++) {
             if (parts[i].equals("")) {
                 for (int j = i + 1; j < parts.length; j++) {
                     if (!parts[j].equals("")) {
@@ -215,7 +185,9 @@ public class Algorithm {
                 }
             }
         }
+    }
 
+    private static String createTextFromParts(String[] parts) {
         String text = "";
         for (int i=0; i<parts.length; i++) {
             if (parts[0].equals(""))
@@ -241,6 +213,5 @@ public class Algorithm {
         }
         return text;
     }
-
 
 }
