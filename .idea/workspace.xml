@@ -36,12 +36,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.6923077">
               <caret line="200" column="28" selection-start-line="200" selection-start-column="28" selection-end-line="200" selection-end-column="28" />
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="53" selection-start-line="44" selection-start-column="3" selection-end-line="46" selection-end-column="53" />
+>>>>>>> refs/remotes/origin/Limak
+=======
+=======
+>>>>>>> parent of ec45262... Next change...
+=======
+>>>>>>> parent of ec45262... Next change...
+            <state vertical-scroll-proportion="0.3402299">
+              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+>>>>>>> parent of ec45262... Next change...
               <folding>
+                <element signature="e#2701#3438#0" expanded="true" />
+                <element signature="e#3437#3438#0" expanded="true" />
                 <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -59,11 +77,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
               <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+=======
+            <state vertical-scroll-proportion="0.45057473">
+              <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+>>>>>>> refs/remotes/origin/Limak
+=======
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+>>>>>>> parent of ec45262... Next change...
+=======
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+>>>>>>> parent of ec45262... Next change...
+=======
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+>>>>>>> parent of ec45262... Next change...
               <folding />
             </state>
           </provider>
@@ -1506,8 +1541,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1543,9 +1578,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1554,15 +1589,57 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VoiceSMS" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VoiceSMS" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VoiceSMS" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="voicesms" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="02b46535" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="42032674c8e41100" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23_x86" />
     <property name="ExportApk.ApkPath" value="F:\Programowanie\Projekty Android\VoiceSMS\app" />
     <property name="ExportApk.Flavors" value="" />
@@ -1771,6 +1848,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21124361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29301533" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1782,14 +1860,32 @@
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13993949" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1376702" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> refs/remotes/origin/Limak
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1376702" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> parent of ec45262... Next change...
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1376702" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> parent of ec45262... Next change...
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1376702" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> parent of ec45262... Next change...
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21124361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -1810,7 +1906,7 @@
       <breakpoints-defaults>
         <breakpoint suspend="ALL" type="java-line" />
       </breakpoints-defaults>
-      <option name="time" value="157" />
+      <option name="time" value="159" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1820,6 +1916,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -1849,6 +1948,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+=======
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
+>>>>>>> parent of ec45262... Next change...
+=======
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
+>>>>>>> parent of ec45262... Next change...
+=======
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
+>>>>>>> parent of ec45262... Next change...
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -1886,6 +1997,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -1915,6 +2028,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -1944,6 +2059,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -1973,6 +2090,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2002,6 +2121,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="280" column="44" selection-start-line="280" selection-start-column="44" selection-end-line="280" selection-end-column="44" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2031,6 +2152,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="463" column="0" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2060,6 +2183,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="463" column="0" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2089,6 +2214,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2118,6 +2245,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="330" column="49" selection-start-line="330" selection-start-column="49" selection-end-line="330" selection-end-column="49" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2147,6 +2276,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2176,6 +2307,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2205,6 +2338,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2234,6 +2369,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="285" column="44" selection-start-line="285" selection-start-column="33" selection-end-line="285" selection-end-column="44" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2263,6 +2400,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="285" column="44" selection-start-line="285" selection-start-column="33" selection-end-line="285" selection-end-column="44" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2292,6 +2431,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2321,6 +2462,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="114" column="58" selection-start-line="114" selection-start-column="58" selection-end-line="114" selection-end-column="58" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2350,6 +2493,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2382,19 +2527,39 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.6923077">
           <caret line="200" column="28" selection-start-line="200" selection-start-column="28" selection-end-line="200" selection-end-column="28" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="53" selection-start-line="44" selection-start-column="3" selection-end-line="46" selection-end-column="53" />
+>>>>>>> refs/remotes/origin/Limak
+=======
+=======
+>>>>>>> parent of ec45262... Next change...
+=======
+>>>>>>> parent of ec45262... Next change...
+        <state vertical-scroll-proportion="0.3402299">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+>>>>>>> parent of ec45262... Next change...
           <folding>
+            <element signature="e#2701#3438#0" expanded="true" />
+            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="method#startVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#stopVoiceRead#0;class#MainActivity#0" expanded="false" />
             <element signature="method#processingResult#0;class#MainActivity#0" expanded="false" />
@@ -2408,6 +2573,14 @@
             <element signature="method#setContactText#0;class#MainActivity#0" expanded="false" />
             <element signature="method#clearContact#0;class#MainActivity#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/kamil/voicesms/Algorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45057473">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
