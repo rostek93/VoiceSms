@@ -35,11 +35,8 @@ public class Algorithm {
     private static void findPunctuationMarks(String[] parts, int i) {
         if (parts[i].equalsIgnoreCase("kropka")) {
             parts[i] = ".";
-            for (int j = i + 1; j < parts.length; j++)
-                if (!parts[j].equals("")) {
-                    parts[j] = Character.toUpperCase(parts[j].charAt(0)) + (parts[j].length() > 1 ? parts[j].substring(1) : "");
-                    break;
-                }
+            if (i + 1 < parts.length)
+                parts[i + 1] = Character.toUpperCase(parts[i + 1].charAt(0)) + (parts[i + 1].length() > 1 ? parts[i + 1].substring(1) : "");
         }
 
         else if (parts[i].equalsIgnoreCase("przecinek"))
@@ -50,21 +47,15 @@ public class Algorithm {
                 if (parts[i + 1].equalsIgnoreCase("zapytania")) {
                     parts[i] = "?";
                     parts[i + 1] = "";
-                    for (int j = i + 2; j < parts.length; j++)
-                        if (!parts[j].equals("")) {
-                            parts[j] = Character.toUpperCase(parts[j].charAt(0)) + (parts[j].length() > 1 ? parts[j].substring(1) : "");
-                            break;
-                        }
+                    if (i + 2 < parts.length)
+                        parts[i + 2] = Character.toUpperCase(parts[i + 2].charAt(0)) + (parts[i + 2].length() > 1 ? parts[i + 2].substring(1) : "");
                 }
         }
 
         else if (parts[i].equalsIgnoreCase("wykrzyknik")) {
             parts[i] = "!";
-            for (int j = i + 1; j < parts.length; j++)
-                if (!parts[j].equals("")) {
-                    parts[j] = Character.toUpperCase(parts[j].charAt(0)) + (parts[j].length() > 1 ? parts[j].substring(1) : "");
-                    break;
-                }
+            if (i + 1 < parts.length)
+                parts[i + 1] = Character.toUpperCase(parts[i + 1].charAt(0)) + (parts[i + 1].length() > 1 ? parts[i + 1].substring(1) : "");
         }
 
         else if (parts[i].equalsIgnoreCase("cudzysłów"))
