@@ -1,6 +1,7 @@
 package com.example.kamil.voicesms;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,12 +28,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-enum FieldEnum { contact, message }
-
 public class MainActivity extends Activity {
     private static final String TAG = "VoiceSMS";
 
     private ImageButton startButton;
+    private Button clearButton;
+    private Button exitButton;
     private EditText messageField;
     private EditText contactField;
     private TextView messageTextView;
@@ -54,15 +55,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        startButton = (ImageButton) findViewById(R.id.startButton);
-        Button clearButton = (Button) findViewById(R.id.clearButton);
-        Button exitButton = (Button) findViewById(R.id.exitButton);
-        messageField = (EditText) findViewById(R.id.messageField);
-        contactField = (EditText) findViewById(R.id.contactField);
-        messageTextView = (TextView) findViewById(R.id.messageTextView);
-        contactTextView = (TextView) findViewById(R.id.contactTextView);
-        iconImageView = (ImageView) findViewById(R.id.imageView);
+        bindView();
 
         messageTextView.setTypeface(Typeface.DEFAULT_BOLD);
         messageField.setSelection(messageField.length());
@@ -70,50 +63,33 @@ public class MainActivity extends Activity {
         iconImageView.setImageResource(R.drawable.redicon);
         fieldEnum = FieldEnum.message;
 
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSpeechRecognizer == null) {
-                    if (isConnected()) {
-                        startVoiceRead();
-                        Toast.makeText(getApplicationContext(), "Start", Toast.LENGTH_LONG).show();
-                    } else
-                        Toast.makeText(getApplicationContext(), "Brak połączenia z internetem", Toast.LENGTH_LONG).show();
-                } else {
-                    stopVoiceRead();
-                    readyMessageText += changedReceivedMessage;
-                    Toast.makeText(getApplicationContext(), "Stop", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-         clearButton.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 contactText = "";
-                 readyMessageText = "";
-                 messageField.setText(readyMessageText);
-                 contactField.setText(contactText);
-                 stopVoiceRead();
-             }
-         });
-
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopVoiceRead();
-                System.exit(0);
-            }
-        });
+        startButton.setOnClickListener(new StartButtonListener());
+        clearButton.setOnClickListener(new ClearButtonListener());
+        exitButton.setOnClickListener(new ExitButtonListener());
     }
 
-    public boolean isConnected() {
+    private void displayToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void bindView() {
+        startButton = (ImageButton) findViewById(R.id.startButton);
+        clearButton = (Button) findViewById(R.id.clearButton);
+        exitButton = (Button) findViewById(R.id.exitButton);
+        messageField = (EditText) findViewById(R.id.messageField);
+        contactField = (EditText) findViewById(R.id.contactField);
+        messageTextView = (TextView) findViewById(R.id.messageTextView);
+        contactTextView = (TextView) findViewById(R.id.contactTextView);
+        iconImageView = (ImageView) findViewById(R.id.imageView);
+    }
+
+    private boolean isConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo net = cm.getActiveNetworkInfo();
         return (net != null && net.isAvailable() && net.isConnected());
     }
 
-    public void startVoiceRead() {
+    private void startVoiceRead() {
         Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
@@ -121,7 +97,7 @@ public class MainActivity extends Activity {
         getSpeechRecognizer().startListening(speechIntent);
     }
 
-    public void stopVoiceRead() {
+    private void stopVoiceRead() {
         if (mSpeechRecognizer != null) {
             mSpeechRecognizer.destroy();
             mSpeechRecognizer = null;
@@ -195,7 +171,6 @@ public class MainActivity extends Activity {
                             message = "Not recognised";
                             break;
                     }
-                    // mTextView.append("onError code:" + error + " message: " + message);
                     Log.d(TAG, "onError:" + message);
                     if (restart) {
                         getSpeechRecognizer().cancel();
@@ -211,7 +186,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void onPartialResults(Bundle partialResults) {
                     Log.d(TAG, "onPartialResults");
-                    ArrayList<String> text = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    List<String> text = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     receiveResult(text);
                 }
 
@@ -219,7 +194,7 @@ public class MainActivity extends Activity {
                 public void onResults(Bundle results) {
                     Log.d(TAG, "onResults");
                     /** Get result here, because we want to as fast as possible called startVoiceRead() */
-                    ArrayList<String> text = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    List<String> text = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     startVoiceRead();
                     receiveResult(text);
                     if (fieldEnum == FieldEnum.message)
@@ -234,7 +209,7 @@ public class MainActivity extends Activity {
         return mSpeechRecognizer;
     }
 
-    private void receiveResult(ArrayList<String> result) {
+    private void receiveResult(List<String> result) {
         if (result != null) {
             if (result.size() > 0) {
                 String text = result.get(0);
@@ -262,9 +237,9 @@ public class MainActivity extends Activity {
     private boolean changeField(String[] parts) {
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].equalsIgnoreCase("edytorze")) {
-                if (i == parts.length - 1)
+                if (i == parts.length - 1) {
                     return true;
-
+                }
                 if (i + 1 < parts.length) {
                     if (parts[i + 1].equalsIgnoreCase("wiadomość") && fieldEnum == FieldEnum.contact) {
                         changeFieldToContact();
@@ -306,13 +281,14 @@ public class MainActivity extends Activity {
     private boolean sendSms(String[] parts) {
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].equalsIgnoreCase("edytorze")) {
-                if (i == parts.length - 1)
+                if (i == parts.length - 1) {
                     return true;
-
+                }
                 if (i + 1 < parts.length) {
                     if (parts[i + 1].equalsIgnoreCase("wyślij")) {
-                        if (i + 1 == parts.length - 1)
+                        if (i + 1 == parts.length - 1) {
                             return true;
+                        }
                     }
                 }
                 if (i + 2 < parts.length) {
@@ -328,18 +304,21 @@ public class MainActivity extends Activity {
 
     private void sendSmsReady() {
         stopVoiceRead();
-        try {
-            if (correctContact) {
+        if (correctContact) {
+            try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(contactText, null, readyMessageText, null, null);
-                Toast.makeText(getApplicationContext(), "Wiadomość została wysłana!", Toast.LENGTH_LONG).show();
-                saveSms();
-            } else {
-                Toast.makeText(getApplicationContext(), "Niepoprawny kontakt!", Toast.LENGTH_LONG).show();
+                displayToast(Constants.Message.SEND_CORRECT);
+            } catch (Exception e) {
+                displayToast(Constants.Message.SEND_FAIL);
             }
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Wysyłanie wiadomości nie powiodło się!", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+            try {
+                saveSms();
+            } catch (Exception e) {
+                displayToast(Constants.Message.SAVE_SMS_FAIL);
+            }
+        } else {
+            displayToast(Constants.Message.INCORRECT_CONTACT);
         }
     }
 
@@ -358,8 +337,9 @@ public class MainActivity extends Activity {
 
     private void processingContact(String[] parts) {
         changedReceivedMessage = originalReceivedMessage;
-        if (!clearContact(parts))
+        if (!clearContact(parts)) {
             setContactText();
+        }
     }
 
     private String getContactFromBook(String text) {
@@ -368,8 +348,9 @@ public class MainActivity extends Activity {
         while (phones.moveToNext()) {
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            if (text.equalsIgnoreCase(name))
+            if (text.equalsIgnoreCase(name)) {
                 number = phoneNumber;
+            }
         }
         phones.close();
         return number;
@@ -379,13 +360,16 @@ public class MainActivity extends Activity {
         correctContact = false;
         contactText = changedReceivedMessage;
         try {
-            Long.valueOf(contactText);
-            contactField.setText(contactText);
+            String number = contactText.replaceAll(" ", "");
+            Long.valueOf(number);
+            contactField.setText(number);
+            contactText = number;
             correctContact = true;
         } catch (Exception e) {
             contactText = getContactFromBook(contactText);
-            if (contactText == null)
-                contactField.setText("Nie znaleziono: " + changedReceivedMessage);
+            if (contactText == null) {
+                contactField.setText(Constants.Message.NOT_FOUND + changedReceivedMessage);
+            }
             else {
                 contactText = contactText.replace("-", "");
                 contactField.setText(contactText);
@@ -397,9 +381,9 @@ public class MainActivity extends Activity {
     private boolean clearContact(String[] parts) {
         for (int i = parts.length - 1; i >= 0; i--) {
             if (parts[i].equalsIgnoreCase("edytorze")) {
-                if (i == parts.length - 1)
+                if (i == parts.length - 1) {
                     return true;
-
+                }
                 if (i + 1 < parts.length) {
                     if (parts[i + 1].equalsIgnoreCase("wyczyść")) {
                         changedReceivedMessage = "";
@@ -409,11 +393,13 @@ public class MainActivity extends Activity {
                             return true;
                         } else {
                             for (int j = 0; j < parts.length; j++) {
-                                if (j < i + 2)
+                                if (j < i + 2) {
                                     parts[j] = "";
+                                }
                                 changedReceivedMessage += parts[j];
-                                if (j >= i + 2 && j != parts.length - 1)
+                                if (j >= i + 2 && j != parts.length - 1) {
                                     changedReceivedMessage += " ";
+                                }
                             }
                             contactText = changedReceivedMessage;
                             return false;
@@ -423,6 +409,45 @@ public class MainActivity extends Activity {
             }
         }
         return false;
+    }
+
+    enum FieldEnum { contact, message }
+
+    class StartButtonListener implements View.OnClickListener {
+        @Override
+        public void onClick (View v){
+            if (mSpeechRecognizer == null) {
+                if (isConnected()) {
+                    startVoiceRead();
+                    displayToast(Constants.Message.START);
+                } else {
+                    displayToast(Constants.Message.ERROR_NETWORK);
+                }
+            } else {
+                stopVoiceRead();
+                readyMessageText += changedReceivedMessage;
+                displayToast(Constants.Message.STOP);
+            }
+        }
+    }
+
+    class ClearButtonListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            contactText = "";
+            readyMessageText = "";
+            messageField.setText(readyMessageText);
+            contactField.setText(contactText);
+            stopVoiceRead();
+        }
+    }
+
+    class ExitButtonListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            stopVoiceRead();
+            System.exit(0);
+        }
     }
 
 }
