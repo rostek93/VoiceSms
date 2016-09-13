@@ -1,8 +1,6 @@
 package com.example.kamil.voicesms;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -42,12 +40,15 @@ public class MainActivity extends Activity {
     private ImageView iconImageView;
     private SpeechRecognizer mSpeechRecognizer = null;
 
-    /** It is processed and changed text of previous recordings */
+    /** Wiadomość utworzona i zmodyfikowana w poprzednich nagraniach */
     public static String readyMessageText = "";
+    /** Oryginalna wiadomość odebrana z serwera */
     public static String originalReceivedMessage = "";
+    /** Zmodyfikowana orginalna wiadomość */
     public static String changedReceivedMessage = "";
-    public String contactText = "";
-
+    /** Zmodyfikowana wiadomość wyświetlana w polu kontakt */
+    public static String contactText = "";
+    /** Flaga oznaczająca poprawność wprowadzonego kontaktu */
     private boolean correctContact = false;
 
     @Override

@@ -4,7 +4,7 @@ public interface Constants {
 
     interface Message {
         static final String START = "Start";
-        static final String ERROR_NETWORK = "Brak połączenia z internetem";
+        static final String ERROR_NETWORK = "Brak połączenia z Internetem";
         static final String STOP = "STOP";
         static final String SEND_CORRECT = "Wiadomość została wysłana!";
         static final String INCORRECT_CONTACT = "Niepoprawny kontakt!";
